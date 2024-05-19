@@ -56,12 +56,17 @@ impl Board {
     // TODO: Update the function to handle actual move validation.
     pub fn is_valid_move(&self, input: &str) -> bool {
         let re = Regex::new(r"([BRQNK])?[a-h]?[1-8]?[x-]?[a-h][1-8](=[BRQN])?[+#]?").unwrap();
-        re.is_match(input)
+
+        if !re.is_match(input) {
+            false
+        } else {
+            true
+        }
     }
 
     // Updates the board state after a move.
     // TODO: Implement the function to handle making moves.
-    pub fn next_move(&self, _m: String) {}
+    pub fn next_move(&mut self, m: String) {}
 
     // Checks if the game has ended in a win or draw.
     // TODO: Implement the function to check game state.

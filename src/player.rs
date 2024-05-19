@@ -9,7 +9,7 @@ pub enum Player {
 impl Player {
     // Switches the player to the opposite color
     pub fn switch(&mut self) {
-        *self = match *self {
+        *self = match self {
             Player::White => Player::Black,
             Player::Black => Player::White,
         };

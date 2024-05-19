@@ -11,6 +11,18 @@ pub enum Piece {
 }
 
 impl Piece {
+    // Returns the color of the current piece
+    pub fn color(&self) -> Color {
+        match self {
+            Piece::Pawn(color)
+            | Piece::Rook(color)
+            | Piece::Knight(color)
+            | Piece::Bishop(color)
+            | Piece::Queen(color)
+            | Piece::King(color) => *color,
+        }
+    }
+
     // This functions prints the right unicode symbol for every peace
     pub fn print(&self) -> char {
         match &self {

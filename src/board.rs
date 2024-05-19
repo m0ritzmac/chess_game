@@ -65,8 +65,8 @@ impl Board {
 
     // Checks if the game has ended in a win or draw.
     // TODO: Implement the function to check game state.
-    pub fn is_over(&self) -> bool {
-        false
+    pub fn is_over(&self) -> Option<bool> {
+        None
     }
 
     // Prints the board with '|' between fields, including row numbers and column letters.

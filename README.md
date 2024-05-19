@@ -8,4 +8,5 @@ Before running the application, ensure that you have Rust and Cargo installed on
 
 To run the application:
 1. Navigate to the directory of the project.
-2. Type `cargo run` in your terminal and press Enter.
+2. Type `cargo build` to build the project.
+3. Type `cargo run` in your terminal and press Enter.

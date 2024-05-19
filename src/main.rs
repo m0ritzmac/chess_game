@@ -39,13 +39,17 @@ fn main() {
         board.print();
         println!();
 
-        // Check if the game has ended
-        if board.is_over() {
-            println!("Player {} has won!", player.print());
-            break;
+        // Check what do after every move.
+        match board.is_over() {
+            None => player.switch(),
+            Some(win) => {
+                if win {
+                    println!("Player {} has won!", player.print());
+                } else {
+                    println!("The game ended in a draw");
+                }
+                break;
+            }
         }
-
-        // Switch to the other player for the next turn
-        player.switch();
     }
 }

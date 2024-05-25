@@ -1,3 +1,5 @@
+use colored::*;
+
 #[derive(Copy, Clone, Debug, PartialEq)]
 
 // Every piece holds a color
@@ -24,20 +26,21 @@ impl Piece {
     }
 
     // This functions prints the right unicode symbol for every peace
-    pub fn print(&self) -> char {
+    pub fn print(&self) -> ColoredString {
+        let dark_black = colored::Color::TrueColor { r: 0, g: 0, b: 0 };
         match &self {
-            Piece::Pawn(Color::Black) => '♙',
-            Piece::Pawn(Color::White) => '♟',
-            Piece::Knight(Color::Black) => '♘',
-            Piece::Knight(Color::White) => '♞',
-            Piece::Bishop(Color::Black) => '♗',
-            Piece::Bishop(Color::White) => '♝',
-            Piece::Rook(Color::Black) => '♖',
-            Piece::Rook(Color::White) => '♜',
-            Piece::Queen(Color::Black) => '♕',
-            Piece::Queen(Color::White) => '♛',
-            Piece::King(Color::Black) => '♔',
-            Piece::King(Color::White) => '♚',
+            Piece::Pawn(Color::White) => "♙".white().bold(),
+            Piece::Pawn(Color::Black) => "♟".color(dark_black),
+            Piece::Knight(Color::White) => "♘".white().bold(),
+            Piece::Knight(Color::Black) => "♞".color(dark_black),
+            Piece::Bishop(Color::White) => "♗".white().bold(),
+            Piece::Bishop(Color::Black) => "♝".color(dark_black),
+            Piece::Rook(Color::White) => "♖".white().bold(),
+            Piece::Rook(Color::Black) => "♜".color(dark_black),
+            Piece::Queen(Color::White) => "♕".white().bold(),
+            Piece::Queen(Color::Black) => "♛".color(dark_black),
+            Piece::King(Color::White) => "♔".white().bold(),
+            Piece::King(Color::Black) => "♚".color(dark_black),
         }
     }
 }
@@ -60,10 +63,10 @@ pub enum Field {
 
 impl Field {
     // This function prints the correct unicode symbol for Every Field
-    pub fn print(&self) -> char {
+    pub fn print(&self) -> ColoredString {
         match self {
-            Field::Empty(Color::White) => '◻',
-            Field::Empty(Color::Black) => '◼',
+            Field::Empty(Color::White) => "◼".white(),
+            Field::Empty(Color::Black) => "◻".black(),
             Field::Occupied(piece) => piece.print(),
         }
     }

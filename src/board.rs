@@ -4,6 +4,8 @@ use regex::Regex;
 // The board is implemented as an 8x8 array where each field is of type Field.
 pub struct Board {
     board: [[Field; 8]; 8],
+    is_draw: bool,
+    is_won: bool,
 }
 
 impl Board {
@@ -49,7 +51,11 @@ impl Board {
         board[7][3] = Field::Occupied(Piece::Queen(Color::White));
         board[7][4] = Field::Occupied(Piece::King(Color::White));
 
-        Self { board }
+        Board {
+            board,
+            is_draw: false,
+            is_won: false,
+        }
     }
 
     // Checks if the given move is valid.
@@ -71,7 +77,13 @@ impl Board {
     // Checks if the game has ended in a win or draw.
     // TODO: Implement the function to check game state.
     pub fn is_over(&self) -> Option<bool> {
-        None
+        if self.is_draw {
+            Some(false)
+        } else if self.is_won {
+            Some(true)
+        } else {
+            None
+        }
     }
 
     // Prints the board with '|' between fields, including row numbers and column letters.

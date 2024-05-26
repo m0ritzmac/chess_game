@@ -24,17 +24,15 @@ fn main() {
 
         // Read and validate the player's input
         loop {
-            if io::stdin().read_line(&mut input).is_ok()
-                && board.is_valid_move(input.trim().to_lowercase().as_str())
-            {
-                break;
+            if io::stdin().read_line(&mut input).is_ok() {
+                match board.next_move(input.trim().to_string()) {
+                    Ok(_) => break,
+                    Err(e) => println!("{}", e),
+                }
             } else {
-                println!("Your input was not a valid move, please try again!");
+                println!("Failed to read input");
             }
         }
-
-        // Update the board with the valid move
-        board.next_move(input.trim().to_string().to_lowercase());
 
         // Print the updated board state
         println!();

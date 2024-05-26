@@ -1,5 +1,15 @@
 use crate::piece::{Color, Field, Piece};
 use regex::Regex;
+use std::fmt;
+
+pub struct InvalidMoveError;
+
+// Implement the Display trait for the custom error type to provide a human-readable error message
+impl fmt::Display for InvalidMoveError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "Please input a valid move!")
+    }
+}
 
 // The board is implemented as an 8x8 array where each field is of type Field.
 pub struct Board {
@@ -60,7 +70,7 @@ impl Board {
 
     // Checks if the given move is valid.
     // TODO: Update the function to handle actual move validation.
-    pub fn is_valid_move(&self, input: &str) -> bool {
+    fn is_valid_move(&self, input: &str) -> bool {
         let re = Regex::new(r"([BRQNK])?[a-h]?[1-8]?[x-]?[a-h][1-8](=[BRQN])?[+#]?").unwrap();
 
         if !re.is_match(input) {
@@ -72,18 +82,17 @@ impl Board {
 
     // Updates the board state after a move.
     // TODO: Implement the function to handle making moves.
-    pub fn next_move(&mut self, m: String) {}
+    pub fn next_move(&mut self, input: String) -> Result<(), InvalidMoveError> {
+        if !self.is_valid_move(input.as_str()) {
+            Err(InvalidMoveError)
+        } else {
+            Ok(())
+        }
+    }
 
     // Checks if the game has ended in a win or draw.
-    // TODO: Implement the function to check game state.
     pub fn is_over(&self) -> Option<bool> {
-        if self.is_draw {
-            Some(false)
-        } else if self.is_won {
-            Some(true)
-        } else {
-            None
-        }
+        self.is_draw.then(|| false).or(self.is_won.then(|| true))
     }
 
     // Prints the board with '|' between fields, including row numbers and column letters.

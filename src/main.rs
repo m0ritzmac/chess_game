@@ -35,9 +35,7 @@ fn main() {
         }
 
         // Print the updated board state
-        println!();
-        board.print();
-        println!();
+        println!("\n{}", board.get_position());
 
         // Check what do after every move.
         match board.is_over() {

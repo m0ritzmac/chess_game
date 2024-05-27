@@ -96,16 +96,20 @@ impl Board {
     }
 
     // Prints the board with '|' between fields, including row numbers and column letters.
-    pub fn print(&self) {
+    pub fn get_position(&self) -> String {
+        let mut result = String::new();
+
         for (i, row) in self.board.iter().enumerate() {
-            print!("{} |", 8 - i);
+            result.push_str(&format!("{} |", 8 - i));
 
             for field in row {
-                print!("{} |", field.print());
+                result.push_str(&format!("{} |", field.print()));
             }
 
-            println!();
+            result.push('\n');
         }
-        println!("   A  B  C  D  E  F  G  H ");
+        result.push_str("   A  B  C  D  E  F  G  H \n");
+
+        result
     }
 }

@@ -1,5 +1,4 @@
 use crate::piece::{Color, Field, Piece};
-use regex::Regex;
 use std::fmt;
 
 pub struct InvalidMoveError;
@@ -70,22 +69,50 @@ impl Board {
 
     // Checks if the given move is valid.
     // TODO: Update the function to handle actual move validation.
-    fn is_valid_move(&self, input: &str) -> bool {
-        let re = Regex::new(r"([BRQNK])?[a-h]?[1-8]?[x-]?[a-h][1-8](=[BRQN])?[+#]?").unwrap();
-
-        if !re.is_match(input) {
-            false
+    fn is_valid_move(&self, input: &str, color: Color) -> bool {
+        if input == "O-O" || input == "O-O-O" {
+            todo!();
+        } else if input.starts_with("R") {
+            todo!();
+        } else if input.starts_with("N") {
+            todo!();
+        } else if input.starts_with("B") {
+            todo!();
+        } else if input.starts_with("Q") {
+            todo!();
+        } else if input.starts_with("K") {
+            todo!();
         } else {
-            true
+            if "abcdefg".contains(&input[0..1]) {
+                todo!();
+            } else {
+                false
+            }
         }
     }
 
     // Updates the board state after a move.
     // TODO: Implement the function to handle making moves.
-    pub fn next_move(&mut self, input: String) -> Result<(), InvalidMoveError> {
-        if !self.is_valid_move(input.as_str()) {
+    pub fn next_move(&mut self, input: String, color: Color) -> Result<(), InvalidMoveError> {
+        if !self.is_valid_move(input.as_str(), color) {
             Err(InvalidMoveError)
         } else {
+            let mut piece = Piece::Bishop(color);
+
+            if input == "O-O" || input == "O-O-O" {
+                todo!();
+            } else if input.starts_with("R") {
+                piece = Piece::Rook(color);
+            } else if input.starts_with("N") {
+                piece = Piece::Knight(color);
+            } else if input.starts_with("B") {
+                piece = Piece::Bishop(color);
+            } else if input.starts_with("Q") {
+                piece = Piece::Queen(color);
+            } else if input.starts_with("K") {
+                piece = Piece::King(color);
+            }
+
             Ok(())
         }
     }

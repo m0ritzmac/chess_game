@@ -25,7 +25,7 @@ fn main() {
         // Read and validate the player's input
         loop {
             if io::stdin().read_line(&mut input).is_ok() {
-                match board.next_move(input.trim().to_string()) {
+                match board.next_move(input.trim().to_string(), player.color()) {
                     Ok(_) => break,
                     Err(e) => println!("{}", e),
                 }
